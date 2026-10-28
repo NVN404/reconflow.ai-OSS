@@ -1,0 +1,86 @@
+{
+  "summary": {
+    "target": "demo-sandbox.corp",
+    "total_nodes": 2,
+    "critical_risks": 1,
+    "high_risks": 0,
+    "medium_risks": 0,
+    "low_risks": 1,
+    "info": 1,
+    "info_assets_count": 1,
+    "vulnerability_count": 1,
+    "external_threat_count": 0,
+    "ai_discarded_noise_count": 0,
+    "security_score": 65,
+    "security_grade": "D",
+    "search_queries_used": 6,
+    "generated_at": "2026-10-25T11:00:00Z",
+    "protocol_used": "direct_rest"
+  },
+  "executive_summary": "ReconFlow reconnaissance against demo-sandbox.corp discovered 2 total perimeter nodes with 1 Critical risk.",
+  "nodes": [
+    {
+      "id": "target-root",
+      "type": "rootNode",
+      "position": {"x": 0.0, "y": 0.0},
+      "data": {
+        "label": "demo-sandbox.corp",
+        "category": "ROOT_DOMAIN",
+        "severity": "INFO",
+        "origin": "INTERNAL",
+        "surface": "Apex DNS",
+        "engine": "google",
+        "section": "INFO",
+        "metadata": {
+          "url": "https://demo-sandbox.corp",
+          "snippet": "Root perimeter domain",
+          "dork_used": "site:demo-sandbox.corp",
+          "discovered_at": "11:00:00"
+        }
+      }
+    },
+    {
+      "id": "node-env-leak",
+      "type": "findingNode",
+      "position": {"x": 200.0, "y": 150.0},
+      "data": {
+        "label": "Exposed .env Configuration",
+        "category": "CONFIG_LEAK",
+        "severity": "CRITICAL",
+        "origin": "INTERNAL",
+        "surface": "Web Server Root",
+        "engine": "google",
+        "section": "VULNERABILITY",
+        "what_is_the_bug": "Unauthenticated access to production .env file",
+        "why_it_is_a_bug": "Exposes master database credentials",
+        "attack_vector": "Adversary downloads credentials",
+        "how_to_fix": "Deny access to dotfiles in NGINX",
+        "remediation": "Block access to .env",
+        "owasp_tag": "OWASP A05:2021 — Security Misconfiguration",
+        "metadata": {
+          "url": "https://api.demo-sandbox.corp/.env",
+          "snippet": "DB_PASSWORD=secret",
+          "dork_used": "filetype:env",
+          "discovered_at": "11:00:00"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "source": "target-root",
+      "target": "node-env-leak",
+      "label": "Exposes Secret",
+      "animated": false
+    }
+  ],
+  "thoughts": [
+    {
+      "timestamp": "11:00:00",
+      "stage": "DEMO_FIXTURE",
+      "message": "Demo sandbox fixture loaded from local cache.",
+      "status": "success"
+    }
+  ]
+}

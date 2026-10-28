@@ -1,0 +1,8 @@
+# ReconFlow AI: Custom Enterprise Proxy List
+# Add your custom or corporate HTTP / HTTPS / SOCKS5 proxies here, one per line.
+# Format examples:
+#   http://192.168.1.100:8080
+#   http://username:password@proxy.example.com:3128
+#   socks5://127.0.0.1:9050
+#
+# If left empty, ReconFlow routes requests directly and securely through your primary network egress.
